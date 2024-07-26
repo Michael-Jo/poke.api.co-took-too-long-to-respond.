@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Handlebars</title>
 </head>
 <body>
     <div id="content"></div>
-
+    
     <script src="https://cdn.jsdeliur.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
     <script id="cardTemplate" type="text/x-handlbars-template">
@@ -19,6 +19,47 @@
     </script>
 
     <script>
+        const template = Handlebars.compile("Handlebar <b>{{doesWhat}}</b>");
+        // execute the compiled template and print the output to the console
+        // console.log(template({ doesWhat: "rock!"}));
+        // document.getElementById("content").innerHTML = template({ doesWhat: "rocks!"});
+
+        const cardTemplate = Handlebars.compile(`
+            {{#each pokemons}}
+            <div class="card">
+                <h1 id="title">{{ title }}</h1>
+                <p class="text">{{ text </p>
+                {{#if imgUrl}}
+                <img id="image" src="{{ imgUrl }}" alt="">
+                {{else}}
+                    <p>No Image</p>
+                {{/if}}
+            </div>
+            {{/each}}
+        `);
+
+        const cardTemplate2 = Handlebars.compile(document.getElementById("cardTemplate").innerHtml)
+
+        const info = {
+            title : "The Best",
+            text : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque error delectus voluptatum. Ut necessitatibus omnis totam perspiciatis repudiandae consequuntur iste distinctio nostrum quam cum consectetur, deleniti quaerat? Temporibus cum dolor labore magni, quibusdam est? Sunt voluptate illo adipisci similique incidunt, illum sint quidem, sed debitis ea quisquam culpa, qui dolores.",
+            imgUrl: ""
+        };
+
+        const infos = {
+            "pokemons" : [
+                {
+                    title : "The Best",
+                    text : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque error delectus voluptatum. Ut necessitatibus omnis totam perspiciatis repudiandae consequuntur iste distinctio nostrum quam cum consectetur, deleniti quaerat? Temporibus cum dolor labore magni, quibusdam est? Sunt voluptate illo adipisci similique incidunt, illum sint quidem, sed debitis ea quisquam culpa, qui dolores.",
+                    imgUrl : ""
+                },
+                {
+                    title : "The Best",
+                    text : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque error delectus voluptatum. Ut necessitatibus omnis totam perspiciatis repudiandae consequuntur iste distinctio nostrum quam cum consectetur, deleniti quaerat? Temporibus cum dolor labore magni, quibusdam est? Sunt voluptate illo adipisci similique incidunt, illum sint quidem, sed debitis ea quisquam culpa, qui dolores.",
+                    imgUrl : ""
+                }
+            ]
+        }
     </script>
 </body>
 </html>
