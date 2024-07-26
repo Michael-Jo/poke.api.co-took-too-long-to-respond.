@@ -19,7 +19,7 @@
     </script>
 
     <script>
-        const template = Handlebars.compile("Handlebar <b>{{doesWhat}}</b>");
+        const template = Handlebars.compile("Handlebar <b>{{doesWhat}}</b>"); // Offline / No Internet connection -> Error ERR_INTERNET_DISCONNECTED + ReferenceError: Handlebars is not defined
         // execute the compiled template and print the output to the console
         // console.log(template({ doesWhat: "rock!"}));
         // document.getElementById("content").innerHTML = template({ doesWhat: "rocks!"});
@@ -60,6 +60,12 @@
                 }
             ]
         }
+
+        // document.getElementById("content").innerHTML = cardTemplate2(info);
+
+        document.getElementById("content").innerHTML = cardTemplate(infos);
+
+
     </script>
 </body>
 </html>
