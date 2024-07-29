@@ -93,12 +93,15 @@
 
         async function loadPokemon(){
             try {
-                let result = await fetch(`https://poke.api.co/api/v2/pokemon/${currentIndex}`);
+                showLoading();
+                let result = await fetch(`https://pokeapi.co/api/v2/pokemon/${currentIndex}`);
                 result = await result.json()
                 // console.log(data);
                 updateContent();
             } catch (error) {
                 console.error(error);
+            } finally {
+                hideLoading();
             }
         }
         loadPokemon();
@@ -117,6 +120,13 @@
             }
         })
         document.getElementById("image").src = "Spinner.png"
+        function showLoading() {
+            document.getElementById('image').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('image').style.display = 'none';
+        }
         document.addEventListener("DOMContentLoaded", () => {
             
             function updateContent(index){
