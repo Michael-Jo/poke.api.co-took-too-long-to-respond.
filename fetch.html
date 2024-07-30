@@ -50,6 +50,9 @@
             min-width: 80vw;
             background-color: white;
             border: 1pt black solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -72,7 +75,7 @@
         function updateContent(){
             let pokemon = data;
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").innerHTML = pokemon.sprites.front_default;
+            document.getElementById("image").src = pokemon.sprites.front_default;
         }
 
         let data = {};
