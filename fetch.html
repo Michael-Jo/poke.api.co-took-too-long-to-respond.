@@ -72,7 +72,7 @@
         function updateContent(){
             let pokemon = data;
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").innerHTML = pokemon.sprites.front_default;
+            document.getElementById("image").src = pokemon.sprites.front_default;
         }
 
         let data = {};
