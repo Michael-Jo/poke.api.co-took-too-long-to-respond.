@@ -121,11 +121,11 @@
         })
         document.getElementById("loadingimg").src = "Spinner.png"
         function showLoading() {
-            document.getElementById('loadingimg').style.display = 'flex'; // this cause the error ?
+            document.getElementById('loadingimg').src.style.display = 'flex'; // this cause the error ?
         }
 
         function hideLoading() {
-            document.getElementById('loadingimg').style.display = 'none'; // also this
+            document.getElementById('loadingimg').src.style.display = 'none'; // also this
         }
         document.addEventListener("DOMContentLoaded", () => {
             
