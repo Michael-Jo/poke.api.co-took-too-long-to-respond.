@@ -50,15 +50,12 @@
             min-width: 80vw;
             background-color: white;
             border: 1pt black solid;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
     </style>
 </head>
 <body>
     <div class="loading">
-        <img src="Spinner.png" alt="">
+        <img src="" alt="">
     </div>
     <div class="container">
 
@@ -98,7 +95,8 @@
             try {
                 showLoading();
                 let result = await fetch(`https://pokeapi.co/api/v2/pokemon/${currentIndex}`);
-                result = await result.json()
+                                        //https://pokeapi.co/api/v2/pokemon/1 lalu akhirnya +1 setiap arah panah kanan di klik dan -1 untuk kiri (Dalam batasan)
+                result = await result.json() // how to fix code 404 error ???
                 // console.log(data);
                 updateContent();
             } catch (error) {
@@ -122,21 +120,20 @@
                 updateContent(currentIndex);
             }
         })
+        document.getElementById("image").src = "Spinner.png"
         function showLoading() {
-            // document.getElementById('img').src = "Spinner.png"
-            document.getElementById('img').style.display = 'flex';
+            document.getElementById('image').style.display = 'flex';
         }
 
         function hideLoading() {
-            document.getElementById('img').style.display = 'none';
+            document.getElementById('image').style.display = 'none';
         }
         document.addEventListener("DOMContentLoaded", () => {
             
             function updateContent(index){
             let pokemon = data;
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").src = pokemon.sprites.front_default; // This cause error despite no typo ?
-            // document.getElementById("image").innerHTML = pokemon.sprites.front_default; // still error ?
+            document.getElementById("image").src = pokemon.sprites.front_default;
             // document.getElementById("description").innerHTML = info.description;
         }
 
@@ -161,7 +158,7 @@
                 }, 3000);
             };
 
-            ajax.open("GET", url, true); // url is suppose to be `https://pokeapi.co/api/v2/pokemon/${currentIndex}`not https://michael-jo.github.io/poke.api.co-took-too-long-to-respond./0 and how did the computer get this link ???
+            ajax.open("GET", url, true);
             ajax.send();
         })
         });
