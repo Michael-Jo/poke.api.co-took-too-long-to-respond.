@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="loading">
-        <img src="Spinner.png" alt="">
+        <img src="Spinner.png" alt="" id="Spinner">
     </div>
     <div class="container">
 
@@ -124,11 +124,11 @@
         })
         function showLoading() {
             // document.getElementById('img').src = "Spinner.png"
-            document.getElementById('img').src.style.display = 'flex';
+            document.getElementById('spinner').src.style.display = 'flex';
         }
 
         function hideLoading() {
-            document.getElementById('img').src.style.display = 'none';
+            document.getElementById('spinner').src.style.display = 'none';
         }
         document.addEventListener("DOMContentLoaded", () => {
             
