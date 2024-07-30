@@ -95,8 +95,7 @@
             try {
                 showLoading();
                 let result = await fetch(`https://pokeapi.co/api/v2/pokemon/${currentIndex}`);
-                                        //https://pokeapi.co/api/v2/pokemon/1 lalu akhirnya +1 setiap arah panah kanan di klik dan -1 untuk kiri (Dalam batasan)
-                result = await result.json() // how to fix code 404 error ???
+                result = await result.json()
                 // console.log(data);
                 updateContent();
             } catch (error) {
@@ -133,7 +132,8 @@
             function updateContent(index){
             let pokemon = data;
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").src = pokemon.sprites.front_default;
+            // document.getElementById("image").src = pokemon.sprites.front_default; // This cause error despite no typo ?
+            document.getElementById("image").innerText = pokemon.sprites.front_default;
             // document.getElementById("description").innerHTML = info.description;
         }
 
