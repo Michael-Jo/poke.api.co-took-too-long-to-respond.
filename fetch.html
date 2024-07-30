@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="loading">
-        <img src="" alt="">
+        <img src="Spinner.png" alt="">
     </div>
     <div class="container">
 
@@ -123,12 +123,12 @@
             }
         })
         function showLoading() {
-            document.getElementById('img').src = "Spinner.png"
-            document.getElementById('img').style.display = 'flex';
+            // document.getElementById('img').src = "Spinner.png"
+            document.getElementById('img').src.style.display = 'flex';
         }
 
         function hideLoading() {
-            document.getElementById('img').style.display = 'none';
+            document.getElementById('img').src.style.display = 'none';
         }
         document.addEventListener("DOMContentLoaded", () => {
             
