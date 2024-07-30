@@ -55,7 +55,7 @@
 </head>
 <body>
     <div class="loading">
-        <img src="" alt="">
+        <img src="" alt="" id="loadingimg">
     </div>
     <div class="container">
 
@@ -119,13 +119,13 @@
                 updateContent(currentIndex);
             }
         })
-        document.getElementById("image").src = "Spinner.png"
+        document.getElementById("loadingimg").src = "Spinner.png"
         function showLoading() {
-            document.getElementById('img').style.display = 'flex'; // this cause the error ?
+            document.getElementById('loadingimg').style.display = 'flex'; // this cause the error ?
         }
 
         function hideLoading() {
-            document.getElementById('img').style.display = 'none'; // also this
+            document.getElementById('loadingimg').style.display = 'none'; // also this
         }
         document.addEventListener("DOMContentLoaded", () => {
             
