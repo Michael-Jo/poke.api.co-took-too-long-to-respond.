@@ -25,18 +25,6 @@
                 display: none;
             }
         } */
-        div.loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: sticky;
-            top: calc((100vh - 200px)/2);
-            left: calc((100vw - 200px)/2);
-        }
-        div.loading img.loadingimg {
-            height: 200px;
-            width: 200px;
-        }
         div.container {
             min-height: 95vh;
             min-width: 55vw;
@@ -67,7 +55,7 @@
 </head>
 <body>
     <div class="loading">
-        <img src="" alt="" id="loadingimg">
+        <img src="" alt="">
     </div>
     <div class="container">
 
@@ -84,7 +72,7 @@
         function updateContent(){
             let pokemon = data;
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").src = pokemon.sprites.front_default;
+            document.getElementById("image").innerHTML = pokemon.sprites.front_default;
         }
 
         let data = {};
@@ -131,13 +119,13 @@
                 updateContent(currentIndex);
             }
         })
-        document.getElementById("loadingimg").src = "Spinner.png"
+        document.getElementById("image").src = "Spinner.png"
         function showLoading() {
-            document.getElementById('loadingimg').src.style.display = 'flex'; // this cause the error ?
+            document.getElementById('img').style.display = 'flex';
         }
 
         function hideLoading() {
-            document.getElementById('loadingimg').src.style.display = 'none'; // also this
+            document.getElementById('img').style.display = 'none';
         }
         document.addEventListener("DOMContentLoaded", () => {
             
