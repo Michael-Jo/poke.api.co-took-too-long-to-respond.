@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fetch</title>
-    <style> /* Challenge buat animasi saat loading dari pokeapi, bisa menggunakan loading.io, direkomendasi saat loading */
+    <style>
         * {
             margin: 0px;
             padding: 0px;
@@ -18,13 +18,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* div.loading {
-            @media screen {
-                display: block;
-                animation-delay: 100ms;
-                display: none;
-            }
-        } */
         div.container {
             min-height: 95vh;
             min-width: 55vw;
@@ -33,7 +26,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
         }
         div.container span {
             min-height: 5vh;
@@ -54,117 +46,82 @@
             align-items: center;
             justify-content: center;
         }
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
     <div class="loading">
-        <img src="" alt="">
+        <img src="Spinner.png" alt="Loading...">
     </div>
     <div class="container">
-
-        <span id ="left">←</span>
+        <span id="left">←</span>
         <div class="content">
             <h1 id="title"></h1>
             <img src="" alt="" id="image" width="500px">
-            <p id = "description"></p>
+            <p id="description"></p>
         </div>
         <span id="right">→</span>
-        
     </div>
     <script>
-        function updateContent(){
-            let pokemon = data;
+        function updateContent(pokemon) {
             document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").src = pokemon.sprites.front_default; // idk what to say anymore
-            // document.getElementById("description").innerHTML = info.description;
+            if (pokemon.sprites && pokemon.sprites.front_default) {
+                document.getElementById("image").src = pokemon.sprites.front_default;
+            } else {
+                document.getElementById("image").src = "Error.png"; // Fallback image
+            }
         }
 
         let data = {};
         let currentIndex = 1;
 
-        // fetch(`https://poke.api.co/api/v2/pokemon/${currentIndex}`)
-        //     .then(result => {
-        //         return result.json()
-        //     })
-        //     .then(result =>{
-        //         data = result;
-        //         // console.log(data);
-        //         updateContent();
-        //     })
-        //     .catch(error =>{
-        //         console.error(error);
-        //     });
-
-        async function loadPokemon(){
+        async function loadPokemon() {
             try {
                 showLoading();
                 let result = await fetch(`https://pokeapi.co/api/v2/pokemon/${currentIndex}`);
-                                        //https://pokeapi.co/api/v2/pokemon/1 lalu akhirnya +1 setiap arah panah kanan di klik dan -1 untuk kiri (Dalam batasan)
-                result = await result.json() // how to fix code 404 error ???
-                // console.log(data);
-                updateContent();
+                if (!result.ok) {
+                    throw new Error(`HTTP error! status: ${result.status}`);
+                }
+                data = await result.json();
+                updateContent(data);
             } catch (error) {
                 console.error(error);
+                document.getElementById("image").src = "Error.png";
             } finally {
                 hideLoading();
             }
         }
+
         loadPokemon();
 
         document.getElementById("right").addEventListener('click', () => {
-            if (currentIndex > 0){
-                currentIndex++;
-                loadPokemon();
-            }
-        })
+            currentIndex++;
+            loadPokemon();
+        });
 
         document.getElementById("left").addEventListener('click', () => {
-            if (currentIndex < data.length){
+            if (currentIndex > 1) {
                 currentIndex--;
-                updateContent(currentIndex);
+                loadPokemon();
             }
-        })
-        document.getElementById("image").src = "Spinner.png"
+        });
+
         function showLoading() {
-            document.getElementById('image').style.display = 'flex';
+            document.querySelector('.loading').style.display = 'block';
         }
 
         function hideLoading() {
-            document.getElementById('image').style.display = 'none';
+            document.querySelector('.loading').style.display = 'none';
         }
+
         document.addEventListener("DOMContentLoaded", () => {
-            
-            function updateContent(index){
-            let pokemon = data;
-            document.getElementById("title").innerHTML = pokemon.name;
-            document.getElementById("image").src = pokemon.sprites.front_default;
-            // document.getElementById("description").innerHTML = info.description;
-        }
-
-        let data = {};
-        let currentIndex = 1;
-        // let url = "https://pokeapi.co/api/v2/pokemon/25"&currentIndex;
-        let url = `https://pokeapi.co/api/v2/pokemon/${currentIndex}`;
-        const loadDataPromise = new Promise((resolve, reject)=> {
-            const ajax = new XMLHttpRequest();
-            ajax.onload = function(){
-                if (this.status == 200 && this.readyState == 4) {
-                    data = JSON.parse(this.responseText);
-                    resolve(data);
-                } else {
-                    reject("No data");
-                    document.getElementById("image").src = "Error.png"
-                }
-                
-                setTimeout(()=>{
-                    reject("No data");
-                    document.getElementById("image").src = "Error.png"
-                }, 3000);
-            };
-
-            ajax.open("GET", url, true);
-            ajax.send();
-        })
+            loadPokemon();
         });
     </script>
 </body>
